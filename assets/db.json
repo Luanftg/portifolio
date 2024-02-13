@@ -1,0 +1,68 @@
+{
+    "cursos": [
+        {
+            "title": "C#",
+            "description": "Curso de C# - Parte 1",
+            "minister": "Guilherme Matheus Costa",
+            "institution": "Alura",
+            "workload": "03h23m",
+            "image_path": "assets/certificates/c#/c#_parte1.png"
+        },
+        {
+            "title": "C#",
+            "description": "Curso de C# - Parte 2",
+            "minister": "Guilherme Matheus Costa",
+            "institution": "Alura",
+            "workload": "03h12m",
+            "image_path": "assets/certificates/c#/c#_parte2.png"
+        },
+        {
+            "title": "C#",
+            "description": "Curso de C# - Parte 3",
+            "minister": "Guilherme Matheus Costa",
+            "institution": "Alura",
+            "workload": "03h04m",
+            "image_path": "assets/certificates/c#/c#_parte3.png"
+          },
+          {
+            "title": "C#",
+            "description": "Curso de C# - Parte 4",
+            "minister": "Guilherme Matheus Costa",
+            "institution": "Alura",
+            "workload": "03h28m",
+            "image_path": "assets/certificates/c#/c#_parte4.png"
+          },
+          {
+            "title": "C#",
+            "description": "Curso de C# - Parte 5",
+            "minister": "Guilherme Matheus Costa",
+            "institution": "Alura",
+            "workload": "03h28m",
+            "image_path": "assets/certificates/c#/c#_parte5.png"
+          },
+          {
+            "title": "C#",
+            "description": "Curso de C# - Parte 6",
+            "minister": "Guilherme Matheus Costa",
+            "institution": "Alura",
+            "workload": "03h04m",
+            "image_path": "assets/certificates/c#/c#_parte6.png"
+          },
+          {
+            "title": "C#",
+            "description": "Curso de C# - Parte 7",
+            "minister": "Guilherme Matheus Costa",
+            "institution": "Alura",
+            "workload": "03h04m",
+            "image_path": "assets/certificates/c#/c#_parte7.png"
+          },
+          {
+            "title": "C#",
+            "description": "Curso de C# - Parte 8",
+            "minister": "Guilherme Matheus Costa",
+            "institution": "Alura",
+            "workload": "03h04m",
+            "image_path": "assets/certificates/c#/c#_parte8.png"
+          }
+    ]
+}
