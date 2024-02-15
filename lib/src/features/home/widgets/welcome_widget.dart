@@ -17,7 +17,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
   late AnimationController _textAnimationController;
   late Animation<double> _animation;
   final String _animatedText =
-      ' desenvolvedor Flutter com foco no segmento mobile, engenheiro civil de formação e estudante de tecnologias voltadas ao desenvolvimento de softwares.';
+      ', desenvolvedor Flutter com foco no segmento mobile, engenheiro civil de formação e estudante de tecnologias voltadas ao desenvolvimento de softwares.';
 
   @override
   void initState() {
@@ -42,11 +42,17 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
     });
 
     widget._animationController.addListener(() async {
-      await Future.delayed(const Duration(seconds: 2));
+      // await Future.delayed(const Duration(seconds: 2));
       if (widget._animationController.value == 0) {
         _textAnimationController.reset();
       }
     });
+  }
+
+  @override
+  void dispose() {
+    _textAnimationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -62,13 +68,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget>
           TextSpan(
             children: [
               const TextSpan(
-                text: 'Eu sou ',
-                style: TextStyle(
-                  fontFamily: 'Montserrat',
-                ),
-              ),
-              const TextSpan(
-                text: 'Luan Fonseca,',
+                text: 'Luan Fonseca',
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   fontSize: 18,

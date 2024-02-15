@@ -13,6 +13,10 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   firebase_core: ^2.25.4
+  flutter_bloc: ^8.1.4
+  get_it: ^7.6.7
+  url_launcher: ^6.2.4
+  font_awesome_flutter: ^10.7.0
 
 dev_dependencies:
   flutter_test:
@@ -28,6 +32,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+    - assets/projects/
+    - assets/images/
     - assets/certificates/c#/
     - assets/db.json
     

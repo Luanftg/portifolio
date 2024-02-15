@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:portifolio/src/features/courses/course_model.dart';
-import 'package:portifolio/src/features/courses/course_service.dart';
-import 'package:portifolio/src/features/home/widgets/welcome_card_widget.dart';
-import 'package:portifolio/src/features/home/widgets/welcome_certificates_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:portifolio/src/features/home/bloc/event/home_event.dart';
+import 'package:portifolio/src/features/home/bloc/home_bloc.dart';
+import 'package:portifolio/src/features/home/bloc/state/home_state.dart';
+import 'package:portifolio/src/features/home/views/initial_home_view.dart';
+import 'package:portifolio/src/features/home/views/mobile_projects_view.dart';
+import 'package:portifolio/src/features/home/views/mobile_training_view.dart';
 
 class MobileLayout extends StatefulWidget {
   const MobileLayout({super.key});
@@ -13,41 +16,6 @@ class MobileLayout extends StatefulWidget {
 
 class _MobileLayoutState extends State<MobileLayout>
     with SingleTickerProviderStateMixin {
-  final ValueNotifier<double> _opacity = ValueNotifier<double>(0);
-  late AnimationController _opacityController;
-  late ScrollController _scrollController;
-
-  @override
-  void initState() {
-    super.initState();
-    _scrollController = ScrollController();
-    _opacityController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 2),
-    );
-
-    _opacityController.forward();
-  }
-
-  @override
-  void dispose() {
-    _opacityController.dispose();
-    _opacity.dispose();
-    _scrollController.dispose();
-    super.dispose();
-  }
-
-  void _changeOpacity() async {
-    _scrollController.animateTo((_opacity.value == 1) ? -500 : 500,
-        duration: const Duration(seconds: 2), curve: Curves.easeInOut);
-    _opacity.value == 0
-        ? await Future.delayed(const Duration(seconds: 1))
-        : null;
-    _opacity.value = (_opacity.value == 1) ? 0 : 1;
-    _opacityController.reset();
-    _opacityController.forward();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,10 +25,32 @@ class _MobileLayoutState extends State<MobileLayout>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextButton(onPressed: () {}, child: const Text('Tudo sobre mim')),
-              TextButton(onPressed: () {}, child: const Text('Projetos')),
-              TextButton(onPressed: () {}, child: const Text('Formação')),
-              TextButton(onPressed: () {}, child: const Text('Contato')),
+              TextButton(
+                onPressed: () {
+                  context.read<HomeBloc>().add(
+                        ChangeView(view: HomeView.initial),
+                      );
+                },
+                child: const Text('Início'),
+              ),
+              TextButton(
+                onPressed: () => context.read<HomeBloc>().add(
+                      ChangeView(view: HomeView.projects),
+                    ),
+                child: const Text('Projetos'),
+              ),
+              TextButton(
+                onPressed: () => context.read<HomeBloc>().add(
+                      ChangeView(view: HomeView.training),
+                    ),
+                child: const Text('Formação'),
+              ),
+              TextButton(
+                onPressed: () => context.read<HomeBloc>().add(
+                      ChangeView(view: HomeView.contacts),
+                    ),
+                child: const Text('Contato'),
+              ),
             ],
           ),
         ),
@@ -68,88 +58,17 @@ class _MobileLayoutState extends State<MobileLayout>
       appBar: AppBar(
         backgroundColor: Colors.transparent,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.miniEndFloat,
-      floatingActionButton: FloatingActionButton(
-          onPressed: _changeOpacity, child: const Icon(Icons.person)),
-      body: NestedScrollView(
-        controller: _scrollController,
-        headerSliverBuilder: (context, innerBoxIsScrolled) => [
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-              child: Container(
-                width: MediaQuery.sizeOf(context).width * 0.7,
-                height: MediaQuery.sizeOf(context).height * 0.6,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade800,
-                  backgroundBlendMode: BlendMode.lighten,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.white70, width: 0.5),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Center(
-                    child: Text(
-                      'Luan Fonseca',
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontStyle: FontStyle.italic,
-                        fontSize: 64,
-                      ),
-                    ),
-                  ),
-                ),
+      body: BlocBuilder<HomeBloc, HomeState>(
+        builder: (context, state) {
+          return switch (state) {
+            InitialHomeState() => const InitialHomeView(),
+            TrainingHomeState() => const MobileTrainingView(),
+            ProjectsHomeState() => MobileProjectsView(projects: state.projects),
+            HomeState() => const Center(
+                child: CircularProgressIndicator(),
               ),
-            ),
-          ),
-        ],
-        body: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            SizedBox(
-              width: MediaQuery.sizeOf(context).width * 0.7,
-              child: ValueListenableBuilder(
-                valueListenable: _opacity,
-                builder: (
-                  context,
-                  opacity,
-                  child,
-                ) {
-                  return AnimatedOpacity(
-                    curve: Curves.easeInCirc,
-                    opacity: opacity,
-                    duration: const Duration(seconds: 1),
-                    child: WelcomeCardWidget(
-                      animationController: _opacityController,
-                    ),
-                  );
-                },
-              ),
-            ),
-            FutureBuilder<List<CourseModel>>(
-              future: CourseService.instance.getCourses(),
-              builder: (context, snapCourses) {
-                switch (snapCourses.connectionState) {
-                  case ConnectionState.none:
-                  case ConnectionState.waiting:
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  case ConnectionState.done:
-                  case ConnectionState.active:
-                    if (snapCourses.hasData && snapCourses.data != null) {
-                      return WelcomeCertificatesWidget(
-                        courses: snapCourses.data!,
-                      );
-                    }
-                    return const SizedBox.shrink();
-                  default:
-                    return const SizedBox.shrink();
-                }
-              },
-            ),
-          ],
-        ),
+          };
+        },
       ),
     );
   }
