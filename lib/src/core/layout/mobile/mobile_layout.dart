@@ -20,35 +20,77 @@ class _MobileLayoutState extends State<MobileLayout>
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
+        backgroundColor: Colors.transparent,
+        width: 150,
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 40),
               TextButton(
+                onHover: (value) {
+                  return value
+                      ? context.read<HomeBloc>().add(
+                            ChangeColorEvent(
+                              Colors.amberAccent,
+                              title: 'Início',
+                            ),
+                          )
+                      : null;
+                },
                 onPressed: () {
                   context.read<HomeBloc>().add(
                         ChangeView(view: HomeView.initial),
                       );
+                  Navigator.of(context).pop();
                 },
                 child: const Text('Início'),
               ),
               TextButton(
-                onPressed: () => context.read<HomeBloc>().add(
-                      ChangeView(view: HomeView.projects),
-                    ),
+                onHover: (value) => value
+                    ? context.read<HomeBloc>().add(
+                          ChangeColorEvent(Colors.purpleAccent,
+                              title: 'Projetos'),
+                        )
+                    : null,
+                onPressed: () {
+                  context.read<HomeBloc>().add(
+                        ChangeView(view: HomeView.projects),
+                      );
+                  Navigator.of(context).pop();
+                },
                 child: const Text('Projetos'),
               ),
               TextButton(
-                onPressed: () => context.read<HomeBloc>().add(
-                      ChangeView(view: HomeView.training),
-                    ),
+                onHover: (value) => value
+                    ? context.read<HomeBloc>().add(
+                          ChangeColorEvent(Colors.redAccent, title: 'Formação'),
+                        )
+                    : null,
+                onPressed: () {
+                  context.read<HomeBloc>().add(
+                        ChangeView(view: HomeView.training),
+                      );
+                  if (mounted) {
+                    Navigator.of(context).pop();
+                  }
+                },
                 child: const Text('Formação'),
               ),
               TextButton(
-                onPressed: () => context.read<HomeBloc>().add(
-                      ChangeView(view: HomeView.contacts),
-                    ),
+                onHover: (value) => value
+                    ? context.read<HomeBloc>().add(
+                          ChangeColorEvent(Colors.greenAccent,
+                              title: value ? 'Contato' : 'Luan Fonseca'),
+                        )
+                    : null,
+                onPressed: () {
+                  context.read<HomeBloc>().add(
+                        ChangeView(view: HomeView.contacts),
+                      );
+                  Navigator.of(context).pop();
+                },
                 child: const Text('Contato'),
               ),
             ],
@@ -61,7 +103,10 @@ class _MobileLayoutState extends State<MobileLayout>
       body: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           return switch (state) {
-            InitialHomeState() => const InitialHomeView(),
+            InitialHomeState() => InitialHomeView(
+                endColor: state.endColor,
+                title: state.title,
+              ),
             TrainingHomeState() => const MobileTrainingView(),
             ProjectsHomeState() => MobileProjectsView(projects: state.projects),
             HomeState() => const Center(

@@ -9,6 +9,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       : _iProjectService = iProjectService,
         super(InitialHomeState()) {
     on<ChangeView>(((event, emit) => _handleChangePageEvent(event, emit)));
+    on<ChangeColorEvent>(
+        ((event, emit) => _handleChangeColorEvent(event: event, emit: emit)));
   }
 
   Future<void> _handleChangePageEvent(
@@ -29,6 +31,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       default:
         break;
     }
+  }
+
+  void _handleChangeColorEvent({
+    required ChangeColorEvent event,
+    required Emitter emit,
+  }) {
+    emit(InitialHomeState(endColor: event.endColor, title: event.title));
   }
 
   Future<void> _handleProjectState(Emitter<HomeState> emit) async {

@@ -27,27 +27,91 @@ class _HomePageState extends State<HomePage> {
           mobile: const MobileLayout(),
           desktop: Scaffold(
             appBar: AppBar(backgroundColor: Colors.transparent, actions: [
-              TextButton(
-                  onPressed: () => context
-                      .read<HomeBloc>()
-                      .add(ChangeView(view: HomeView.initial)),
-                  child: const Text('Início')),
-              TextButton(
-                  onPressed: () => context
-                      .read<HomeBloc>()
-                      .add(ChangeView(view: HomeView.projects)),
-                  child: const Text('Projetos')),
-              TextButton(
-                  onPressed: () => context
-                      .read<HomeBloc>()
-                      .add(ChangeView(view: HomeView.training)),
-                  child: const Text('Formação')),
-              TextButton(onPressed: () {}, child: const Text('Contato')),
+              TweenAnimationBuilder(
+                tween: Tween<double>(begin: 0, end: 1),
+                curve: Curves.easeInOut,
+                builder: (context, value, child) => Opacity(
+                  opacity: value,
+                  child: TextButton(
+                      onHover: (value) {
+                        return value
+                            ? context.read<HomeBloc>().add(
+                                  ChangeColorEvent(
+                                    value ? Colors.amberAccent : Colors.white70,
+                                    title: 'Início',
+                                  ),
+                                )
+                            : null;
+                      },
+                      onPressed: () => context
+                          .read<HomeBloc>()
+                          .add(ChangeView(view: HomeView.initial)),
+                      child: const Text('Início')),
+                ),
+                duration: const Duration(seconds: 1),
+              ),
+              TweenAnimationBuilder(
+                tween: Tween<double>(begin: 0, end: 1),
+                curve: Curves.easeInOut,
+                builder: (context, value, child) => Opacity(
+                  opacity: value,
+                  child: TextButton(
+                    onHover: (value) => value
+                        ? context.read<HomeBloc>().add(ChangeColorEvent(
+                            value ? Colors.purpleAccent : Colors.white70,
+                            title: 'Projetos'))
+                        : null,
+                    onPressed: () => context.read<HomeBloc>().add(
+                          ChangeView(view: HomeView.projects),
+                        ),
+                    child: const Text('Projetos'),
+                  ),
+                ),
+                duration: const Duration(milliseconds: 1500),
+              ),
+              TweenAnimationBuilder(
+                tween: Tween<double>(begin: 0, end: 1),
+                curve: Curves.easeInOut,
+                builder: (context, value, child) => Opacity(
+                  opacity: value,
+                  child: TextButton(
+                      onHover: (value) => value
+                          ? context.read<HomeBloc>().add(ChangeColorEvent(
+                              value ? Colors.redAccent : Colors.white70,
+                              title: 'Formação'))
+                          : null,
+                      onPressed: () => context
+                          .read<HomeBloc>()
+                          .add(ChangeView(view: HomeView.training)),
+                      child: const Text('Formação')),
+                ),
+                duration: const Duration(milliseconds: 1800),
+              ),
+              TweenAnimationBuilder(
+                tween: Tween<double>(begin: 0, end: 1),
+                curve: Curves.easeInOut,
+                builder: (context, value, child) => Opacity(
+                  opacity: value,
+                  child: TextButton(
+                    onHover: (value) => value
+                        ? context.read<HomeBloc>().add(ChangeColorEvent(
+                            value ? Colors.greenAccent : Colors.white70,
+                            title: 'Contato'))
+                        : null,
+                    onPressed: () {},
+                    child: const Text('Contato'),
+                  ),
+                ),
+                duration: const Duration(milliseconds: 2000),
+              ),
             ]),
             body: BlocBuilder<HomeBloc, HomeState>(
               builder: (context, state) {
                 return switch (state) {
-                  InitialHomeState() => const InitialHomeView(),
+                  InitialHomeState() => InitialHomeView(
+                      endColor: state.endColor,
+                      title: state.title,
+                    ),
                   TrainingHomeState() => const TrainingView(),
                   ProjectsHomeState() => ProjectsView(projects: state.projects),
                   HomeState() => const Center(

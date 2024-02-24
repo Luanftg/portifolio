@@ -7,40 +7,48 @@ class WelcomeCertificatesWidget extends StatefulWidget {
     super.key,
     required this.courses,
   });
+
   final List<CourseModel> courses;
+
   @override
   State<WelcomeCertificatesWidget> createState() =>
       _WelcomeCertificatesWidgetState();
 }
 
 class _WelcomeCertificatesWidgetState extends State<WelcomeCertificatesWidget> {
-  late ValueNotifier _opacity;
-  final Set<String> _coursesType = {};
+  late ValueNotifier<double> _opacity;
+  late Map<String, List<CourseModel>> _cursosPorTitulo;
 
   @override
   void initState() {
     super.initState();
     _opacity = ValueNotifier(0);
-    for (var element in widget.courses) {
-      _coursesType.add(element.title);
-    }
+    _cursosPorTitulo = _organizeCoursesByTitle();
     _animate();
   }
 
+  Map<String, List<CourseModel>> _organizeCoursesByTitle() {
+    Map<String, List<CourseModel>> cursosPorTitulo = {};
+    for (var curso in widget.courses) {
+      if (cursosPorTitulo.containsKey(curso.title)) {
+        cursosPorTitulo[curso.title]!.add(curso);
+      } else {
+        cursosPorTitulo[curso.title] = [curso];
+      }
+    }
+    return cursosPorTitulo;
+  }
+
   void _animate() async {
-    await Future.delayed(const Duration(milliseconds: 200));
+    await Future.delayed(const Duration(milliseconds: 800));
     _opacity.value = 1;
   }
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
+    return ValueListenableBuilder<double>(
       valueListenable: _opacity,
-      builder: (
-        context,
-        value,
-        child,
-      ) {
+      builder: (context, value, child) {
         return AnimatedOpacity(
           curve: Curves.easeInOutSine,
           opacity: value,
@@ -61,35 +69,33 @@ class _WelcomeCertificatesWidgetState extends State<WelcomeCertificatesWidget> {
               ),
               const SizedBox(height: 16),
               Expanded(
-                child: ListView.separated(
-                  padding: const EdgeInsets.all(8),
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) => ExpansionTile(
-                    title: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(children: [
-                        Image.asset(
-                          'assets/certificates/c#/c-sharp.png',
-                          width: 20,
-                          height: 20,
+                child: ListView.builder(
+                  itemCount: _cursosPorTitulo.length,
+                  itemBuilder: (context, index) {
+                    String title = _cursosPorTitulo.keys.elementAt(index);
+                    List<CourseModel> cursos = _cursosPorTitulo[title]!;
+                    return ExpansionTile(
+                      title: Padding(
+                        padding: const EdgeInsets.all(24),
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              cursos[0].titlePath,
+                              width: 40,
+                              height: 40,
+                            ),
+                            const SizedBox(width: 8),
+                            Text(title),
+                          ],
                         ),
-                        const SizedBox(width: 16),
-                        Text(widget.courses[index].title)
-                      ]),
-                    ),
-                    children: [
-                      ListView.builder(
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) => CourseItemWidget(
-                          courseModel: widget.courses[index],
-                        ),
-                        itemCount: widget.courses.length,
                       ),
-                    ],
-                  ),
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 8),
-                  itemCount: _coursesType.length,
+                      children: cursos
+                          .map(
+                            (curso) => CourseItemWidget(courseModel: curso),
+                          )
+                          .toList(),
+                    );
+                  },
                 ),
               ),
             ],

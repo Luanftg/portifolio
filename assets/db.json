@@ -2,6 +2,7 @@
     "cursos": [
         {
             "title": "C#",
+            "title_path": "assets/certificates/c#/c-sharp.png",
             "description": "Curso de C# - Parte 1",
             "minister": "Guilherme Matheus Costa",
             "institution": "Alura",
@@ -10,6 +11,7 @@
         },
         {
             "title": "C#",
+            "title_path": "assets/certificates/c#/c-sharp.png",
             "description": "Curso de C# - Parte 2",
             "minister": "Guilherme Matheus Costa",
             "institution": "Alura",
@@ -18,6 +20,7 @@
         },
         {
             "title": "C#",
+            "title_path": "assets/certificates/c#/c-sharp.png",
             "description": "Curso de C# - Parte 3",
             "minister": "Guilherme Matheus Costa",
             "institution": "Alura",
@@ -26,6 +29,7 @@
           },
           {
             "title": "C#",
+            "title_path": "assets/certificates/c#/c-sharp.png",
             "description": "Curso de C# - Parte 4",
             "minister": "Guilherme Matheus Costa",
             "institution": "Alura",
@@ -34,6 +38,7 @@
           },
           {
             "title": "C#",
+            "title_path": "assets/certificates/c#/c-sharp.png",
             "description": "Curso de C# - Parte 5",
             "minister": "Guilherme Matheus Costa",
             "institution": "Alura",
@@ -42,6 +47,7 @@
           },
           {
             "title": "C#",
+            "title_path": "assets/certificates/c#/c-sharp.png",
             "description": "Curso de C# - Parte 6",
             "minister": "Guilherme Matheus Costa",
             "institution": "Alura",
@@ -50,6 +56,7 @@
           },
           {
             "title": "C#",
+            "title_path": "assets/certificates/c#/c-sharp.png",
             "description": "Curso de C# - Parte 7",
             "minister": "Guilherme Matheus Costa",
             "institution": "Alura",
@@ -58,11 +65,21 @@
           },
           {
             "title": "C#",
+            "title_path": "assets/certificates/c#/c-sharp.png",
             "description": "Curso de C# - Parte 8",
             "minister": "Guilherme Matheus Costa",
             "institution": "Alura",
             "workload": "03h04m",
             "image_path": "assets/certificates/c#/c#_parte8.png"
+          },
+          {
+            "title": "Desenvolvimento Mobile com Flutter",
+            "title_path": "assets/certificates/flutter/flutter.png",
+            "description": "Curso de desenvolvimento Mobile em Flutter - com atuação nos temas: Lógica de Programação e Orientação a Objetos com Dart, Versionamento Git, Padrões de Projeto, Arquitetura, Gerenciamento de estados, Firebase e Testes Unitários e de Widgets. Desenvolvimento de Soft Skills: Comunicação Assertiva, Mediação de conflitos, Resiliência, Comunicação e Colaboração, Senso crítico e Analítico.",
+            "minister": "Jéssica Pereira e Kaio Oliveira",
+            "institution": "Proz Educação",
+            "workload": "500h",
+            "image_path": "assets/certificates/flutter/flutter_proz.png"
           }
     ]
 }

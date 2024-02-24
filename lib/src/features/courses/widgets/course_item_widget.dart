@@ -9,27 +9,25 @@ class CourseItemWidget extends StatelessWidget {
   final CourseModel courseModel;
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Card(
-        color: Colors.grey.shade800,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                courseModel.imagePath,
-                height: 300,
-              ),
-              const SizedBox(height: 8),
-              Text('Titulo: ${courseModel.title}'),
-              Text('Descrição: ${courseModel.description}'),
-              Text('Orientador: ${courseModel.minister}'),
-              Text('Carga Horária: ${courseModel.workload}'),
-              Text('Instituição: ${courseModel.institution}'),
-            ],
-          ),
+    return Card(
+      color: Colors.grey.shade800,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              courseModel.imagePath,
+              height: 300,
+            ),
+            const SizedBox(height: 8),
+            Text('Titulo: ${courseModel.title}'),
+            Text('Descrição: ${courseModel.description}'),
+            Text('Orientador: ${courseModel.minister}'),
+            Text('Carga Horária: ${courseModel.workload}'),
+            Text('Instituição: ${courseModel.institution}'),
+          ],
         ),
       ),
     );

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 class CourseModel {
   final String title;
+  final String titlePath;
   final String description;
   final String minister;
   final String institution;
@@ -10,6 +11,7 @@ class CourseModel {
 
   CourseModel({
     required this.title,
+    required this.titlePath,
     required this.description,
     required this.minister,
     required this.institution,
@@ -20,6 +22,7 @@ class CourseModel {
   Map<String, dynamic> toMap() {
     return {
       'title': title,
+      'title_path': titlePath,
       'description': description,
       'minister': minister,
       'institution': institution,
@@ -31,6 +34,7 @@ class CourseModel {
   factory CourseModel.fromMap(Map<String, dynamic> map) {
     return CourseModel(
       title: map['title'] ?? '',
+      titlePath: map['title_path'],
       description: map['description'] ?? '',
       minister: map['minister'] ?? '',
       institution: map['institution'] ?? '',
