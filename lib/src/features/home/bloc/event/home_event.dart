@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum HomeView { training, initial, projects, contacts }
+enum HomeView { training, initial, projects, contacts, timeline }
 
 sealed class HomeEvent {}
 

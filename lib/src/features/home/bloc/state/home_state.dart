@@ -1,3 +1,4 @@
+import 'package:animations_package/animations_package.dart';
 import 'package:flutter/material.dart';
 import 'package:portifolio/src/features/projects/project_model.dart';
 
@@ -20,3 +21,9 @@ class ProjectsHomeState implements HomeState {
 }
 
 class ContactsHomeState implements HomeState {}
+
+class TimeLineHomeState implements HomeState {
+  final DataCard dataCard;
+
+  TimeLineHomeState({required this.dataCard});
+}
