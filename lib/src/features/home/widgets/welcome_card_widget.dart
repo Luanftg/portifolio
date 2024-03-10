@@ -38,41 +38,42 @@ class WelcomeCardWidget extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(16),
-            child: Column(children: [
-              const Text('Contatos'),
-              TextButton.icon(
-                  onPressed: () async {
-                    final Uri emailLaunchUri = Uri(
-                      scheme: 'mailto',
-                      path: 'luanftgimenez@email.com',
-                    );
+            child: Column(
+              children: [
+                const Text('Contatos'),
+                TextButton.icon(
+                    onPressed: () async {
+                      final Uri emailLaunchUri = Uri(
+                        scheme: 'mailto',
+                        path: 'luanftgimenez@email.com',
+                      );
 
-                    launchUrl(emailLaunchUri);
-                  },
-                  icon: const Icon(Icons.mail),
-                  label: const Text(
-                    'luanftgimenez@gmail.com',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontStyle: FontStyle.italic,
-                    ),
-                  )),
-              TextButton.icon(
-                  onPressed: () async {
-                    final Uri emailLaunchUri = Uri.parse(
-                        'https://www.linkedin.com/in/luan-fonseca-34b02bbb/');
+                      launchUrl(emailLaunchUri);
+                    },
+                    icon: const Icon(Icons.mail),
+                    label: const Text(
+                      'luanftgimenez@gmail.com',
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontStyle: FontStyle.italic,
+                      ),
+                    )),
+                TextButton.icon(
+                    onPressed: () async {
+                      final Uri emailLaunchUri = Uri.parse(
+                          'https://www.linkedin.com/in/luan-fonseca-34b02bbb/');
 
-                    launchUrl(emailLaunchUri);
-                  },
-                  icon: const FaIcon(FontAwesomeIcons.linkedinIn),
-                  label: const Text(
-                    'LinkedIn',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontStyle: FontStyle.italic,
-                    ),
-                  )),
-              TextButton.icon(
+                      launchUrl(emailLaunchUri);
+                    },
+                    icon: const FaIcon(FontAwesomeIcons.linkedinIn),
+                    label: const Text(
+                      'LinkedIn',
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontStyle: FontStyle.italic,
+                      ),
+                    )),
+                TextButton.icon(
                   onPressed: () async {
                     final Uri emailLaunchUri = Uri.parse(
                       'https://github.com/Luanftg',
@@ -87,8 +88,10 @@ class WelcomeCardWidget extends StatelessWidget {
                       fontFamily: 'Montserrat',
                       fontStyle: FontStyle.italic,
                     ),
-                  )),
-            ]),
+                  ),
+                ),
+              ],
+            ),
           )
         ],
       ),

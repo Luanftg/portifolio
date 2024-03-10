@@ -84,41 +84,43 @@ class _InitialHomeViewState extends State<InitialHomeView>
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       controller: _scrollController,
-      child: Column(children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-          child: InkWell(
-            onTap: _changeOpacity,
-            child: TweenAnimationBuilder(
-              duration: const Duration(milliseconds: 1500),
-              tween: ColorTween(begin: startColor, end: widget.endColor),
-              curve: Curves.easeInOutCubic,
-              builder: (context, color, child) => Container(
-                width: MediaQuery.of(context).size.width * 0.7,
-                height: MediaQuery.of(context).size.height * 0.6,
-                decoration: BoxDecoration(
-                  color: color,
-                  backgroundBlendMode: BlendMode.lighten,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.white70, width: 0.5),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(
-                    child: TweenAnimationBuilder(
-                      duration: const Duration(seconds: 2),
-                      curve: Curves.easeInOutCubic,
-                      tween: Tween<double>(begin: 0, end: 1),
-                      builder: (context, value, child) => Opacity(
-                        opacity: value,
-                        child: Text(
-                          widget.title,
-                          style: TextStyle(
-                            color: startColor,
-                            fontFamily: 'Montserrat',
-                            fontStyle: FontStyle.italic,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 64,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+            child: InkWell(
+              onTap: _changeOpacity,
+              child: TweenAnimationBuilder(
+                duration: const Duration(milliseconds: 1500),
+                tween: ColorTween(begin: startColor, end: widget.endColor),
+                curve: Curves.easeInOutCubic,
+                builder: (context, color, child) => Container(
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  height: MediaQuery.of(context).size.height * 0.6,
+                  decoration: BoxDecoration(
+                    color: color,
+                    backgroundBlendMode: BlendMode.lighten,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.white70, width: 0.5),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: TweenAnimationBuilder(
+                        duration: const Duration(seconds: 2),
+                        curve: Curves.easeInOutCubic,
+                        tween: Tween<double>(begin: 0, end: 1),
+                        builder: (context, value, child) => Opacity(
+                          opacity: value,
+                          child: Text(
+                            widget.title,
+                            style: TextStyle(
+                              color: startColor,
+                              fontFamily: 'Montserrat',
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 64,
+                            ),
                           ),
                         ),
                       ),
@@ -128,33 +130,33 @@ class _InitialHomeViewState extends State<InitialHomeView>
               ),
             ),
           ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: 350,
-              child: ValueListenableBuilder(
-                valueListenable: _opacity,
-                builder: (
-                  context,
-                  opacity,
-                  child,
-                ) {
-                  return AnimatedOpacity(
-                    curve: Curves.easeInCirc,
-                    opacity: opacity,
-                    duration: const Duration(seconds: 1),
-                    child: WelcomeCardWidget(
-                      animationController: _opacityController,
-                    ),
-                  );
-                },
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 350,
+                child: ValueListenableBuilder(
+                  valueListenable: _opacity,
+                  builder: (
+                    context,
+                    opacity,
+                    child,
+                  ) {
+                    return AnimatedOpacity(
+                      curve: Curves.easeInCirc,
+                      opacity: opacity,
+                      duration: const Duration(seconds: 1),
+                      child: WelcomeCardWidget(
+                        animationController: _opacityController,
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
-        ),
-      ]),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
