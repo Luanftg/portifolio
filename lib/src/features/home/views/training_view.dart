@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:portifolio/src/features/courses/course_firebase_service.dart';
 import 'package:portifolio/src/features/courses/course_model.dart';
-import 'package:portifolio/src/features/courses/course_service.dart';
 import 'package:portifolio/src/features/home/widgets/welcome_certificates_widget.dart';
 
 class TrainingView extends StatefulWidget {
@@ -14,7 +14,7 @@ class _TrainingViewState extends State<TrainingView> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<CourseModel>>(
-      future: CourseService.instance.getCourses(),
+      future: CourseFirebaseService().getCourses(),
       builder: (context, snapCourses) {
         switch (snapCourses.connectionState) {
           case ConnectionState.none:

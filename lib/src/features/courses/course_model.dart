@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class CourseModel {
   final String title;
   final String titlePath;
@@ -8,6 +10,8 @@ class CourseModel {
   final String institution;
   final String workload;
   final String imagePath;
+  final DateTime startDate;
+  final DateTime endDate;
 
   CourseModel({
     required this.title,
@@ -17,6 +21,8 @@ class CourseModel {
     required this.institution,
     required this.workload,
     required this.imagePath,
+    required this.startDate,
+    required this.endDate,
   });
 
   Map<String, dynamic> toMap() {
@@ -40,6 +46,8 @@ class CourseModel {
       institution: map['institution'] ?? '',
       workload: map['workload'] ?? '',
       imagePath: map['image_path'] ?? '',
+      startDate: (map['start_date'] as Timestamp).toDate(),
+      endDate: (map['end_date'] as Timestamp).toDate(),
     );
   }
 
