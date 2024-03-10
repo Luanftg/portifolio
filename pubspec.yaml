@@ -17,6 +17,9 @@ dependencies:
   get_it: ^7.6.7
   url_launcher: ^6.2.4
   font_awesome_flutter: ^10.7.0
+  animations_package:
+    git: https://github.com/Luanftg/animations_package
+  cloud_firestore: ^4.15.6
 
 dev_dependencies:
   flutter_test:
