@@ -55,4 +55,28 @@ class CourseModel {
 
   factory CourseModel.fromJson(String source) =>
       CourseModel.fromMap(json.decode(source));
+
+  CourseModel copyWith({
+    String? title,
+    String? titlePath,
+    String? description,
+    String? minister,
+    String? institution,
+    String? workload,
+    String? imagePath,
+    DateTime? startDate,
+    DateTime? endDate,
+  }) {
+    return CourseModel(
+      title: title ?? this.title,
+      titlePath: titlePath ?? this.titlePath,
+      description: description ?? this.description,
+      minister: minister ?? this.minister,
+      institution: institution ?? this.institution,
+      workload: workload ?? this.workload,
+      imagePath: imagePath ?? this.imagePath,
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
+    );
+  }
 }

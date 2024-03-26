@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:portifolio/src/features/courses/course_model.dart';
-import 'package:portifolio/src/features/courses/course_service.dart';
+import 'package:portifolio/src/core/constants/firebase_constants.dart';
+import 'package:portifolio/src/features/courses/domain/course_model.dart';
+import 'package:portifolio/src/features/courses/domain/service/get_courses_service.dart';
 
-class CourseFirebaseService implements ICourseService {
+class GetFirebaseCoursesService implements IGetCoursesService {
   final FirebaseFirestore firebase = FirebaseFirestore.instance;
-  final String courseCollection = 'courses';
+  final String courseCollection = FireBaseConstants.coursesCollection;
 
   @override
   Future<List<CourseModel>> getCourses() async {

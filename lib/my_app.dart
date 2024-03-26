@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'src/features/home/home_page.dart';
+import 'package:portifolio/src/features/splash/splash_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -13,7 +13,10 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         brightness: Brightness.dark,
       ),
-      home: const HomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (_) => const SplashPage(),
+      },
     );
   }
 }

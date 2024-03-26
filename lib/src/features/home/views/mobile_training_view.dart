@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:portifolio/src/features/courses/course_model.dart';
-import 'package:portifolio/src/features/courses/course_service.dart';
+import 'package:portifolio/src/features/courses/data/local/get_local_courses_service.dart';
+import 'package:portifolio/src/features/courses/domain/course_model.dart';
 import 'package:portifolio/src/features/home/widgets/welcome_certificates_widget.dart';
 
 class MobileTrainingView extends StatefulWidget {
@@ -14,7 +14,7 @@ class _MobileTrainingViewState extends State<MobileTrainingView> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<CourseModel>>(
-      future: CourseService.instance.getCourses(),
+      future: GetLocalCoursesService.instance.getCourses(),
       builder: (context, snapCourses) {
         switch (snapCourses.connectionState) {
           case ConnectionState.none:

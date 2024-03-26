@@ -20,6 +20,10 @@ dependencies:
   animations_package:
     git: https://github.com/Luanftg/animations_package
   cloud_firestore: ^4.15.6
+  firebase_auth: ^4.17.9
+  file_picker: ^8.0.0+1
+  firebase_storage: ^11.6.10
+  
 
 dev_dependencies:
   flutter_test:

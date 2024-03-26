@@ -27,3 +27,5 @@ class TimeLineHomeState implements HomeState {
 
   TimeLineHomeState({required this.dataCard});
 }
+
+class AuthenticationHomeState implements HomeState {}

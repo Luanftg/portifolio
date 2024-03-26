@@ -1,14 +1,12 @@
 import 'dart:convert';
+
 import 'package:flutter/services.dart';
-import 'package:portifolio/src/features/courses/course_model.dart';
+import 'package:portifolio/src/features/courses/domain/course_model.dart';
+import 'package:portifolio/src/features/courses/domain/service/get_courses_service.dart';
 
-abstract class ICourseService {
-  Future<List<CourseModel>> getCourses();
-}
-
-class CourseService implements ICourseService {
-  CourseService._();
-  static CourseService get instance => CourseService._();
+class GetLocalCoursesService implements IGetCoursesService {
+  GetLocalCoursesService._();
+  static GetLocalCoursesService get instance => GetLocalCoursesService._();
 
   @override
   Future<List<CourseModel>> getCourses() async {

@@ -107,7 +107,7 @@ class _InitialHomeViewState extends State<InitialHomeView>
                     padding: const EdgeInsets.all(8.0),
                     child: Center(
                       child: TweenAnimationBuilder(
-                        duration: const Duration(seconds: 2),
+                        duration: const Duration(seconds: 6),
                         curve: Curves.easeInOutCubic,
                         tween: Tween<double>(begin: 0, end: 1),
                         builder: (context, value, child) => Opacity(

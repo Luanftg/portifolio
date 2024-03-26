@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portifolio/src/features/courses/course_model.dart';
+import 'package:portifolio/src/features/courses/domain/course_model.dart';
 import 'package:portifolio/src/features/courses/widgets/course_item_widget.dart';
 
 class WelcomeCertificatesWidget extends StatefulWidget {
